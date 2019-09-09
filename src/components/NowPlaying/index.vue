@@ -5,9 +5,9 @@
 			<ul>
 				<li class="pullDown">{{ pullDownMsg }}</li>
 				<li v-for="item in movieList" :key="item.id">
-					<div class="pic_show" @tap="handleToDetail"><img :src="item.img | setWH('128.180')"></div>
+					<div class="pic_show" @tap="handleToDetail(item.id)"><img :src="item.img | setWH('128.180')"></div>
 					<div class="info_list">
-						<h2>{{ item.nm }} <img v-if="item.version" src="@/assets/maxs.png"></h2>
+						<h2 @tap="handleToDetail(item.id)">{{ item.nm }} <img v-if="item.version" src="@/assets/maxs.png"></h2>
 						<p>观众评 <span class="grade">{{ item.sc }}</span></p>
 						<p>主演: {{ item.star }}</p>
 						<p>{{ item.showInfo }}</p>
@@ -52,8 +52,9 @@ export default {
 		})
 	},
 	methods: {
-		handleToDetail (){
-			console.log(222)
+		handleToDetail (movieId){
+			// console.log(movieId)
+			this.$router.push('/movie/detail/1/'+movieId); 
 		},
 		handleToScroll (pos){
 			if(pos.y>30){
@@ -84,7 +85,7 @@ export default {
 .movie_body ul{ margin:0 12px; overflow: hidden;}
 .movie_body ul li{ margin-top:12px; display: flex; align-items:center; border-bottom: 1px #e6e6e6 solid; padding-bottom: 10px;}
 .movie_body .pic_show{ width:64px; height: 90px;}
-.movie_body .pic_show img{ width:100%;}
+.movie_body .pic_show img{ width:100%; max-height: 95px;}
 .movie_body .info_list { margin-left: 10px; flex:1; position: relative;}
 .movie_body .info_list h2{ font-size: 17px; line-height: 24px; width:150px; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;}
 .movie_body .info_list p{ font-size: 13px; color:#666; line-height: 22px; width:200px; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;}
